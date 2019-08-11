@@ -57,6 +57,9 @@ android:tag="cards main container">
 
 <!--</android.support.v7.widget.CardView>-->
 
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Catagory"/>
 </LinearLayout>
 

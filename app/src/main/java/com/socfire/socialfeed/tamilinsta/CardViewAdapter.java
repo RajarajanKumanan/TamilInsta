@@ -24,8 +24,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MyView
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
-            this.textViewVersion = (TextView) itemView.findViewById(R.id.textViewVersion);
-            //this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -39,7 +37,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MyView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cards_layout, parent, false);
 
-        view.setOnClickListener(MemesActivity.myOnClickListener);
+        view.setOnClickListener(NameListActivity.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -49,11 +47,11 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
         TextView textViewName = holder.textViewName;
-        TextView textViewVersion = holder.textViewVersion;
+      //  TextView textViewVersion = holder.textViewVersion;
         ImageView imageView = holder.imageViewIcon;
 
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewVersion.setText(dataSet.get(listPosition).getVersion());
+        //textViewVersion.setText(dataSet.get(listPosition).getVersion());
         //imageView.setImageResource(dataSet.get(listPosition).getImage());
     }
 

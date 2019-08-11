@@ -55,20 +55,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public  void onClick(View v){
-
+    public void onClick(View v) {
+        Intent i;
         switch (v.getId()) {
             case R.id.baby_boy:
-                showToast("1");
+
+                i = new Intent(this, NameListActivity.class);
+                i.putExtra("Catagory", "Boy");
+                startActivity(i);
                 break;
             case R.id.baby_girl:
-                showToast("4");
+                i = new Intent(this, NameListActivity.class);
+                i.putExtra("Catagory", "Girl");
+                startActivity(i);
                 break;
             case R.id.sangam_names:
-                showToast("3");
+
+                i = new Intent(this, NameListActivity.class);
+                i.putExtra("Catagory", "Sangam");
+                startActivity(i);
                 break;
             case R.id.king_names:
-                showToast("2");
+
+                i = new Intent(this, NameListActivity.class);
+                i.putExtra("Catagory", "King");
+                startActivity(i);
                 break;
             default:
                 break;

@@ -10,9 +10,13 @@ public class DataModel {
     public DataModel(String name, String version) {
         this.name = name;
         this.version = version;
-        this.id_ = id_;
-        this.image=image;
     }
+
+    public DataModel(String name) {
+        this.name = name;
+    }
+
+
 
     public String getName() {
         return name;
