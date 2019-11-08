@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
         sangamTextCaption = (TextView) findViewById(R.id.sangamCaption);
         kingTextCaption = (TextView) findViewById(R.id.kingCaption);
 
@@ -71,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
         muslimCardView = (CardView) findViewById(R.id.muslim_id);
 
 
-        try{
+        try {
             if (mFirebase == null) {
-                mFirebase=FirebaseDatabase.getInstance();
+                mFirebase = FirebaseDatabase.getInstance();
                 mFirebase.setPersistenceEnabled(true);
             }
-        }catch (Exception e){
-            Log.d("database Error",e.toString());
-        }finally {
-            Log.d("database Finally","Done");
+        } catch (Exception e) {
+            Log.d("database Error", e.toString());
+        } finally {
+            Log.d("database Finally", "Done");
             mFirebase = FirebaseDatabase.getInstance();
         }
 
@@ -225,6 +224,18 @@ public class MainActivity extends AppCompatActivity {
                     protected void populateViewHolder(ViewHolder vhVal, DataModel dataModel,
                                                       int position) {
                         vhVal.setTitleAndDescription(getApplicationContext(), dataModel.getName(), dataModel.getMeaning(), dataModel.getSex());
+                        final TextView textView = (TextView) vhVal.itemView.findViewById(R.id.xml_title_post);
+
+                        vhVal.itemView.findViewById(R.id.saveNames).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String txt = textView.getText().toString();  // add here
+
+                                Toast.makeText(MainActivity.this, txt + " -> Saved", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
                     }
 
                 };

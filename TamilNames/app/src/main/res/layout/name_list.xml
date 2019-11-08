@@ -41,7 +41,7 @@
     <!-- Artist Name -->
     <TextView
         android:id="@+id/xml_meaning"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/xml_title_post"
         android:layout_marginTop="1dip"
@@ -51,17 +51,33 @@
         android:textSize="10dip" />
 
 
-
-    <ImageView
-        android:id="@+id/saveName"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="15dp"
-        android:layout_centerVertical="true"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_file_download_black_24dp" >
-    </ImageView>
+        android:layout_marginRight="5dip"
+        android:padding="5dip"
+        >
+
+        <ImageView
+            android:id="@+id/saveNames"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_file_download_black_24dp"
+            android:textAlignment="center">
+        </ImageView>
+
+
+    </LinearLayout>
+
+
+
+
+
 
 </RelativeLayout>

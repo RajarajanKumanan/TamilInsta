@@ -192,8 +192,8 @@ public class SaveAndShareActivity extends AppCompatActivity {
                         lblHeader.setText("Android Login with Google");
                         btnLogin.setVisibility(View.VISIBLE);
                         btnLogout.setVisibility(View.GONE);
-//imgProfilePic.setBackgroundResource(R.drawable.ic_lock);
-                        //imgProfilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock, null));
+imgProfilePic.setBackgroundResource(R.drawable.boy_black);
+                        //imgProfilePic.setImageDrawable(getResources().getDrawable(R.drawable.baby_girl_oval, null));
                     }
                 });
     }

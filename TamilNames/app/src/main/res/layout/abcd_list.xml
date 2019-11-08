@@ -22,7 +22,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/abcd_id"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/dummy_id"></com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 
