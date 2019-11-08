@@ -26,8 +26,29 @@
             android:orientation="horizontal"
             android:weightSum="4">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="சங்ககால தமிழ் பெயர்கள்"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:id="@+id/sangamCaption"/>
 
-            <android.support.v7.widget.CardView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="தமிழ் அரச பெயர்கள்"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:id="@+id/kingCaption"/>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/christian_id"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
@@ -55,9 +76,9 @@
                 </LinearLayout>
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/hindu_id"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
@@ -85,9 +106,9 @@
                 </LinearLayout>
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/muslim_id"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
@@ -115,37 +136,9 @@
                 </LinearLayout>
 
 
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/allReligion_id"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:theme="@style/Theme"
-                app:cardBackgroundColor="#BC110F0F"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="5dp"
-                        android:src="@drawable/religion" />
-                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
-            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
@@ -157,11 +150,11 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/dummy_id"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

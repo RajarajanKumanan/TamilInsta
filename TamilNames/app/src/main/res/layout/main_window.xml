@@ -15,7 +15,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/baby_boy"
             android:layout_width="160dp"
             android:layout_height="190dp"
@@ -50,9 +50,9 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/baby_girl"
             android:layout_width="160dp"
             android:layout_height="190dp"
@@ -87,7 +87,7 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>
@@ -99,7 +99,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/sangam_names"
             android:layout_width="160dp"
             android:layout_height="190dp"
@@ -134,9 +134,9 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/king_names"
             android:layout_width="160dp"
             android:layout_height="190dp"
@@ -171,7 +171,7 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>
@@ -183,10 +183,10 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/birthdatechekcer"
-            android:layout_width="300dp"
-            android:layout_height="140dp"
+            android:layout_width="160dp"
+            android:layout_height="190dp"
             android:layout_margin="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -204,9 +204,9 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@drawable/sangam_oval"
+                    android:background="@drawable/yellow_oval"
                     android:padding="2dp"
-                    android:src="@drawable/sangamicon" />
+                    android:src="@drawable/ic_star_border_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -218,9 +218,44 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/savedactivity"
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:theme="@style/Theme"
+            app:cardBackgroundColor="#BC110F0F"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/yellow_oval"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_star_border_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Save and Share"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>

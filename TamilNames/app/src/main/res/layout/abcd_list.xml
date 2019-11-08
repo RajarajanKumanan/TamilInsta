@@ -22,19 +22,19 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/dummy_id"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/abcd_id"></com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/abcd_recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ll_ad"
         >
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 

@@ -16,4 +16,5 @@
     <color name="cardGreen">#5ebb60</color>
     <color name="cardgray">#b6b6b6</color>
     <color name="birthColor">#65c69d</color>
+    <color name="yellowColor">#FFC107</color>
 </resources>

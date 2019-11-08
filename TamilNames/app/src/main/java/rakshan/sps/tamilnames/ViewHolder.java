@@ -1,11 +1,14 @@
 package rakshan.sps.tamilnames;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -46,6 +49,19 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         }
 
 
+    }
+
+    public void setBirthDayDetails(Context conObj,String title,String shortDescri, String ImageURL){
+        TextView postTitle = mView.findViewById(R.id.birthday_person_name);
+        TextView descTitle = mView.findViewById(R.id.birthday_person_desp);
+        ImageView imagePost = mView.findViewById(R.id.birthday_person);
+
+        Log.d("DeBug",ImageURL);
+        Log.d("DeBug Text",title);
+
+        postTitle.setText(title);
+        descTitle.setText(shortDescri);
+        Picasso.get().load(ImageURL).into(imagePost);
     }
 
 

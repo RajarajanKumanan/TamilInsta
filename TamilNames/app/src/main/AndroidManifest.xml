@@ -24,7 +24,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NameListActivity" />
         <activity android:name=".BirthdayActivity" />
-
+        <activity android:name=".SaveAndShareActivity" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-1185498701006717~4117111354" />

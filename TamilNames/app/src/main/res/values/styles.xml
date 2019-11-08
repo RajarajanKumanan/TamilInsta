@@ -46,7 +46,4 @@
         <item name="colorControlHighlight">#40ffffff</item>
     </style>
 
-    <style name="MyDatePicker" parent="android:Widget.Material.Light.DatePicker">
-        <item name="android:textColorPrimary">@color/white</item>
-    </style>
 </resources>

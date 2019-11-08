@@ -2,11 +2,30 @@ package rakshan.sps.tamilnames;
 
 public class DataModel {
 
-  private String Title;
+    private String Title;
     private String ImageUrl;
     private String alphabet;
     private String name;
     private String meaning;
+    private String birthday_person;
+
+    public String getBirthday_person() {
+        return birthday_person;
+    }
+
+    public void setBirthday_person(String birthday_person) {
+        this.birthday_person = birthday_person;
+    }
+
+    public String getBirthday_person_pic() {
+        return birthday_person_pic;
+    }
+
+    public void setBirthday_person_pic(String birthday_person_pic) {
+        this.birthday_person_pic = birthday_person_pic;
+    }
+
+    private String birthday_person_pic;
 
     public String getSex() {
         return sex;

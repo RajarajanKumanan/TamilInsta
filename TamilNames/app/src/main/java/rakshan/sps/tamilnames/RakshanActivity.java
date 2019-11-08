@@ -4,10 +4,13 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -21,32 +24,33 @@ public class RakshanActivity extends AppCompatActivity implements View.OnClickLi
     private static final String TAG = "RakshanActivity";
 
     private AdView mAdView;
-    private CardView boyClick, girlClick, sangamClick, kingClick,onthisday;
+    private CardView boyClick, girlClick, sangamClick, kingClick, onthisday, saveAndShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_window);
 
-//        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1185498701006717~4117111354");
-//
-//
-//        mAdView = findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1185498701006717~4117111354");
+
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         boyClick = (CardView) findViewById(R.id.baby_boy);
         girlClick = (CardView) findViewById(R.id.baby_girl);
         sangamClick = (CardView) findViewById(R.id.sangam_names);
         kingClick = (CardView) findViewById(R.id.king_names);
         onthisday = (CardView) findViewById(R.id.birthdatechekcer);
+        saveAndShare = (CardView) findViewById(R.id.savedactivity);
 
         boyClick.setOnClickListener(this);
         girlClick.setOnClickListener(this);
         sangamClick.setOnClickListener(this);
         kingClick.setOnClickListener(this);
         onthisday.setOnClickListener(this);
-
+        saveAndShare.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +80,10 @@ public class RakshanActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.birthdatechekcer:
                 i = new Intent(this, BirthdayActivity.class);
                 i.putExtra("Catagory", "King");
+                startActivity(i);
+                break;
+            case R.id.savedactivity:
+                i = new Intent(this, SaveAndShareActivity.class);
                 startActivity(i);
                 break;
 

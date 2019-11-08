@@ -1,41 +1,39 @@
 package rakshan.sps.tamilnames;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     RecyclerView mRecycleView;
     FirebaseDatabase mFirebase;
-    DatabaseReference mDatabaseRef;
     CardView christianCardView, hinduCardView, muslimCardView, Religion;
     String[] splitedVlaue;
     Query masterQuery;
-
+    ProgressBarHandler mProgressBarHandler;
     private static int total_No_Of_Data_To_Load = 0;
+    static boolean calledAlready = false;
+    TextView sangamTextCaption, kingTextCaption;
 
 
     @Override
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecycleView = findViewById(R.id.mainRecycler);
         mRecycleView.setHasFixedSize(true);
+        mProgressBarHandler = new ProgressBarHandler(this); // In onCreate
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1185498701006717~4117111354");
 
         mAdView = findViewById(R.id.adView_namePage);
@@ -58,80 +57,112 @@ public class MainActivity extends AppCompatActivity {
 
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
+
+
+        sangamTextCaption = (TextView) findViewById(R.id.sangamCaption);
+        kingTextCaption = (TextView) findViewById(R.id.kingCaption);
+
+
+        sangamTextCaption.setVisibility(View.GONE);
+        kingTextCaption.setVisibility(View.GONE);
+
         christianCardView = (CardView) findViewById(R.id.christian_id);
         hinduCardView = (CardView) findViewById(R.id.hindu_id);
         muslimCardView = (CardView) findViewById(R.id.muslim_id);
-        Religion = (CardView) findViewById(R.id.allReligion_id);
 
-        mFirebase = FirebaseDatabase.getInstance();
-        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        if (splitedVlaue[0].equals("Girl") || splitedVlaue[0].equals("Boy")) {
-            masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1]);
+
+        try{
+            if (mFirebase == null) {
+                mFirebase=FirebaseDatabase.getInstance();
+                mFirebase.setPersistenceEnabled(true);
+            }
+        }catch (Exception e){
+            Log.d("database Error",e.toString());
+        }finally {
+            Log.d("database Finally","Done");
+            mFirebase = FirebaseDatabase.getInstance();
+        }
+
+        if (splitedVlaue[0].equals("Boy")) {
+            masterQuery = mFirebase.getReference("Hindu").child(splitedVlaue[0]).orderByChild("sex_name").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1]);
+        } else if (splitedVlaue[0].equals("Girl")) {
+            masterQuery = mFirebase.getReference("Hindu").child(splitedVlaue[0]).orderByChild("sex_name").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1]);
         } else if (splitedVlaue[0].equals("Sangam")) {
             christianCardView.setVisibility(View.GONE);
             hinduCardView.setVisibility(View.GONE);
             muslimCardView.setVisibility(View.GONE);
-
-            masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name").equalTo("Sangam_" + splitedVlaue[1]);
+            kingTextCaption.setVisibility(View.GONE);
+            sangamTextCaption.setVisibility(View.VISIBLE);
+            masterQuery = mFirebase.getReference("Sangam").child("Nutral").orderByChild("sex_name").equalTo("Sangam_" + splitedVlaue[1]);
 
         } else {
             hinduCardView.setVisibility(View.GONE);
             muslimCardView.setVisibility(View.GONE);
-            masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name").equalTo("King_" + splitedVlaue[1]);
+            christianCardView.setVisibility(View.GONE);
+            sangamTextCaption.setVisibility(View.GONE);
+            kingTextCaption.setVisibility(View.VISIBLE);
+            masterQuery = mFirebase.getReference("King").child("Nutral").orderByChild("sex_name").equalTo("King_" + splitedVlaue[1]);
         }
         masterQuery.keepSynced(true);
+        mProgressBarHandler.show();
 
 
         christianCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Christian");
+                //Log.d("Print C ",splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Christian");
+                masterQuery = mFirebase.getReference("Christian").child(splitedVlaue[0]).orderByChild("sex_name_religion").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Christian");
                 retriveData(masterQuery);
+                muslimCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
+                hinduCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
+                v.setBackgroundColor(Color.GRAY);
             }
+
         });
+
         hinduCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name_religion").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Hindu");
+                masterQuery = mFirebase.getReference("Hindu").child(splitedVlaue[0]).orderByChild("sex_name_religion").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Hindu");
+                christianCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
+                muslimCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
                 retriveData(masterQuery);
+                v.setBackgroundColor(Color.GRAY);
+
             }
         });
+
         muslimCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name_religion").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Muslim");
+                masterQuery = mFirebase.getReference("Muslim").child(splitedVlaue[0]).orderByChild("sex_name_religion").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1] + "_" + "Muslim");
                 retriveData(masterQuery);
+                christianCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
+                hinduCardView.setBackgroundColor(Color.parseColor("#BC110F0F"));
+                v.setBackgroundColor(Color.GRAY);
             }
         });
-        Religion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                masterQuery = mFirebase.getReference("name_list").orderByChild("sex_name").equalTo(splitedVlaue[0] + "_" + splitedVlaue[1]);
-                retriveData(masterQuery);
-            }
-        });
+
 
     }
 
 
     private void retriveData(Query selectedQuery) {
 
-
+        mProgressBarHandler.show();
         selectedQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     //Toast.makeText(MainActivity.this,"data exists",Toast.LENGTH_SHORT).show();
-
-                }
-                else{
-                    Toast toast = Toast.makeText(MainActivity.this,"No data exists",Toast.LENGTH_LONG);
-                    toast.getView().setBackgroundColor(0xFF00ddff);
+                    mProgressBarHandler.hide();
+                } else {
+                    Toast toast = Toast.makeText(MainActivity.this, "No data exists", Toast.LENGTH_LONG);
+                    toast.getView().setBackgroundColor(Color.RED);
                     toast.getView().setMinimumWidth(200);
                     toast.getView().setMinimumHeight(70);
                     toast.show();
-
-
+                    mProgressBarHandler.hide();
                 }
             }
 
@@ -148,11 +179,9 @@ public class MainActivity extends AppCompatActivity {
                         ViewHolder.class,
                         selectedQuery
                 ) {
-
                     @Override
                     protected void populateViewHolder(ViewHolder vhVal, DataModel dataModel,
                                                       int position) {
-
                         vhVal.setTitleAndDescription(getApplicationContext(), dataModel.getName(), dataModel.getMeaning(), dataModel.getSex());
                     }
 
@@ -164,8 +193,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //Query startUpQuery = mFirebase.getReference("name_list").orderByChild("name").startAt(splitedVlaue[1]).endAt().orderByChild("sex").startAt(splitedVlaue[0]);
+        masterQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //Toast.makeText(MainActivity.this,"data exists",Toast.LENGTH_SHORT).show();
+                    mProgressBarHandler.hide();
+                } else {
+                    Toast toast = Toast.makeText(MainActivity.this, "No data exists", Toast.LENGTH_LONG);
+                    toast.getView().setBackgroundColor(Color.RED);
+                    toast.getView().setMinimumWidth(200);
+                    toast.getView().setMinimumHeight(70);
+                    toast.show();
+                    mProgressBarHandler.hide();
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         FirebaseRecyclerAdapter<DataModel, ViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<DataModel, ViewHolder>(
                         DataModel.class,
@@ -173,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
                         ViewHolder.class,
                         masterQuery
                 ) {
-
                     @Override
                     protected void populateViewHolder(ViewHolder vhVal, DataModel dataModel,
                                                       int position) {
