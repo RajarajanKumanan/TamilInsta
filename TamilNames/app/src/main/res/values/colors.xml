@@ -17,4 +17,6 @@
     <color name="cardgray">#b6b6b6</color>
     <color name="birthColor">#65c69d</color>
     <color name="yellowColor">#FFC107</color>
+    <color name="userPurple">#0ccbe5</color>
+    <color name="userPurple_transparent">#378DB1</color>
 </resources>

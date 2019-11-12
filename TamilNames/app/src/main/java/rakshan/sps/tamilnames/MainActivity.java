@@ -17,16 +17,21 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     RecyclerView mRecycleView;
-    FirebaseDatabase mFirebase;
+    FirebaseDatabase mFirebase, addNames;
     CardView christianCardView, hinduCardView, muslimCardView, Religion;
     String[] splitedVlaue;
     Query masterQuery;
@@ -34,11 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private static int total_No_Of_Data_To_Load = 0;
     static boolean calledAlready = false;
     TextView sangamTextCaption, kingTextCaption;
+    GoogleSignInAccount account;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         mRecycleView = findViewById(R.id.mainRecycler);
@@ -73,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (mFirebase == null) {
                 mFirebase = FirebaseDatabase.getInstance();
+                addNames = FirebaseDatabase.getInstance();
                 mFirebase.setPersistenceEnabled(true);
             }
         } catch (Exception e) {
@@ -80,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         } finally {
             Log.d("database Finally", "Done");
             mFirebase = FirebaseDatabase.getInstance();
+            addNames = FirebaseDatabase.getInstance();
         }
 
         if (splitedVlaue[0].equals("Boy")) {
@@ -225,16 +235,51 @@ public class MainActivity extends AppCompatActivity {
                                                       int position) {
                         vhVal.setTitleAndDescription(getApplicationContext(), dataModel.getName(), dataModel.getMeaning(), dataModel.getSex());
                         final TextView textView = (TextView) vhVal.itemView.findViewById(R.id.xml_title_post);
+                        final List<String> userSavednames = new ArrayList<String>();
 
                         vhVal.itemView.findViewById(R.id.saveNames).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String txt = textView.getText().toString();  // add here
+                                final String txt = textView.getText().toString();  // add here
 
-                                Toast.makeText(MainActivity.this, txt + " -> Saved", Toast.LENGTH_LONG).show();
+                                account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+
+                                if (account != null) {
+                                    try {
+                                        Query dataRoof = FirebaseDatabase.getInstance().getReference("User_and_saved_names").child(account.getId().toString()).child("user_Saved_names");
+                                        dataRoof.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot snapshot) {
+                                                if (snapshot.exists()) {
+                                                    boolean isAvailable = false;
+                                                    for (DataSnapshot ds : snapshot.getChildren()) {
+                                                        if (ds.getValue(String.class).equals(txt)) {
+                                                            isAvailable = true;
+                                                        }
+                                                    }
+                                                    if (!isAvailable) {
+                                                        Toast.makeText(MainActivity.this, "New name added", Toast.LENGTH_SHORT).show();
+                                                        addNames.getReference("User_and_saved_names").child(account.getId().toString()).child("user_Saved_names").push().setValue(txt.toString());
+                                                    } else {
+                                                        Toast.makeText(MainActivity.this, "Name already saved", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Log.i("Firebase Error ", databaseError.getDetails());
+                                            }
+                                        });
+                                    } catch (Exception e) {
+                                        Log.i("Firebase data ", e.toString());
+                                    }
+                                } else {
+                                    Toast.makeText(MainActivity.this, " Please Login to save this NAME", Toast.LENGTH_LONG).show();
+                                }
+
                             }
                         });
-
 
                     }
 

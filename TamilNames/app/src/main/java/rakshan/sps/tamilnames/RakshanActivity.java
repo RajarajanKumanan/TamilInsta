@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.ads.AdListener;
@@ -28,6 +29,7 @@ public class RakshanActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.main_window);
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1185498701006717~4117111354");

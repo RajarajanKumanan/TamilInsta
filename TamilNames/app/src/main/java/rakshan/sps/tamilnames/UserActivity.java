@@ -1,31 +1,51 @@
 package rakshan.sps.tamilnames;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserActivity {
-    public static String UserName;
-    public static String UserEmail;
+    public String gname;
+    public String gemail;
+    public List<String> user_Saved_names;
 
-    public static String getUserName() {
-        return UserName;
+    public String getGname() {
+        return gname;
     }
 
-    public static void setUserName(String userName) {
-        UserName = userName;
+    public void setGname(String gname) {
+        this.gname = gname;
     }
 
-    public static String getUserEmail() {
-        return UserEmail;
+    public String getGemail() {
+        return gemail;
     }
 
-    public static void setUserEmail(String userEmail) {
-        UserEmail = userEmail;
+    public void setGemail(String gemail) {
+        this.gemail = gemail;
     }
+
+    public List<String> getUser_Saved_names() {
+        return user_Saved_names;
+    }
+
+    public void setUser_Saved_names(List<String> user_Saved_names) {
+        this.user_Saved_names = user_Saved_names;
+    }
+
+    public UserActivity(String gname, String gemail, List<String> user_Saved_names) {
+        this.gname = gname;
+        this.gemail = gemail;
+        this.user_Saved_names = user_Saved_names;
+    }
+
+
 
     public UserActivity() {
     }
 
-    public UserActivity(String userName, String userEmail) {
-        UserName = userName;
-        UserEmail = userEmail;
-    }
+
+
+
+
 }
 
