@@ -1,13 +1,43 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url(./assets/images/stromBg.png); */
+  background-size: cover;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: "stormHeader";
+  src: local('stormHeader'), url(./assets/fonts/ReggaeOne-Regular.ttf) format('woff');
+}
+
+.boxOne {
+  width: 90%;
+  height: 70;
+  text-align: "center";
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+  -webkit-background-composite: "linear-gradient(to bottom, #ffb0c7, #ffaac2, #ffa3be, #ff9db9, #ff96b4)";
+}
+
+.MuiTabs-indicator {
+  background: #6e87d7
+}
+.PrivateTabIndicator-colorSecondary-26{
+  background-color: #6e87d7 !important;
+}
+
+.MuiTab-textColorSecondary.Mui-selected{
+  color: #6e87d7 !important;
 }
